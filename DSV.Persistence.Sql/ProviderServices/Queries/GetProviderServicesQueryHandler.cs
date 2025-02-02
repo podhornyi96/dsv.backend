@@ -27,6 +27,7 @@ internal sealed class GetProviderServicesQueryHandler : IRequestHandler<GetProvi
             .Skip(request.Skip)
             .Take(request.Top)
             .Select(providerService => new ProviderService(
+                    providerService.Id,
                     providerService.ServiceId,
                     providerService.Service.Name,
                     providerService.PricePerHour,

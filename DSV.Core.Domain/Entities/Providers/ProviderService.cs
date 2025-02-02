@@ -2,8 +2,9 @@ namespace DSV.Core.Domain.Entities.Providers;
 
 public class ProviderService
 {
-    public ProviderService(int serviceId, string name, decimal pricePerHour, int durationMinutes)
+    public ProviderService(int id, int serviceId, string name, decimal pricePerHour, int durationMinutes)
     {
+        Id = id;
         ServiceId = serviceId;
         Name = name;
         
@@ -12,6 +13,7 @@ public class ProviderService
         PricePerSession = pricePerHour / 60 * DurationMinutes;
     }
     
+    public int Id { get; }
     public string Name { get; }
     public int ServiceId { get; }
     public decimal PricePerHour { get; }

@@ -27,7 +27,7 @@ internal sealed class CreateProviderServiceCommandHandler : IRequestHandler<Crea
         
         await _context.SaveChangesAsync(cancellationToken);
         
-        return new ProviderService(providerService.ServiceId, request.Name, providerService.PricePerHour, 
+        return new ProviderService(providerService.Id, providerService.ServiceId, request.Name, providerService.PricePerHour, 
             providerService.DurationMinutes);
     }
     

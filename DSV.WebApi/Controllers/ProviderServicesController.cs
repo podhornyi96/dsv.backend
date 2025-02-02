@@ -1,5 +1,6 @@
 using AutoMapper;
 using DSV.Core.Domain.Contracts.ProviderServices;
+using DSV.Core.Domain.Contracts.ProviderServices.Commands;
 using DSV.Core.Domain.Contracts.ProviderServices.Queries;
 using DSV.WebApi.Models;
 using DSV.WebApi.Models.ProviderServices;
@@ -41,6 +42,16 @@ public class ProviderServicesController : ApiControllerBase
         var providerServices = await _mediator.Send(new GetProviderServicesQuery(providerId, skip, take));
         
         return Ok(_mapper.Map<ResultSet<ProviderService>>(providerServices));
+    }
+
+    [HttpDelete("{providerServiceId:int}")]
+    public async Task<ActionResult> DeleteAsync([FromRoute] int providerServiceId)
+    {
+        // NOTE: providerId can be used to validate if provider deletes own services.
+        // This logic can be performed inside service
+        await _mediator.Send(new DeleteProviderServiceCommand(providerServiceId));
+        
+        return NoContent();
     }
     
 }
