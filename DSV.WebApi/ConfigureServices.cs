@@ -1,6 +1,8 @@
 using DSV.Core.Domain;
 using DSV.Persistence.Sql;
 using DSV.WebApi.Common;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace DSV.WebApi;
 
@@ -10,6 +12,10 @@ public static class ConfigureServices
     {
         services.AddControllers();
         services.AddAutoMapper(typeof(Program));
+        
+        services.AddFluentValidationAutoValidation()
+            .AddFluentValidationClientsideAdapters()
+            .AddValidatorsFromAssemblyContaining(typeof(Program));
         
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(MediatorDiscovery).Assembly));
 
