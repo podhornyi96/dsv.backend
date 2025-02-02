@@ -7,4 +7,5 @@ public class Provider
     public string LastName { get; set; } = default!;
     public string Email { get; set; } = default!;
     public string? Description { get; set; }
+    public ICollection<ProviderService> ProviderServices { get; set; } = new List<ProviderService>();
 }
