@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DSV.Persistence.Sql.EntityConfigurations;
 
-public class ServiceEntityConfiguration : IEntityTypeConfiguration<Service>
+internal sealed  class ServiceEntityConfiguration : IEntityTypeConfiguration<Service>
 {
     public void Configure(EntityTypeBuilder<Service> builder)
     {

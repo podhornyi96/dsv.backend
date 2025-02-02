@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DSV.Persistence.Sql;
 
-public class DsvDbContext : DbContext
+internal class DsvDbContext : DbContext
 {
     public DsvDbContext(
         DbContextOptions<DsvDbContext> options) 
