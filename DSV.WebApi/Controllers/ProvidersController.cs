@@ -1,13 +1,15 @@
-using DSV.Core.Domain.Contracts.Providers;
 using DSV.Core.Domain.Contracts.Providers.Commands;
 using DSV.Core.Domain.Contracts.Providers.Queries;
+using DSV.WebApi.Common.Filters;
+using DSV.WebApi.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DSV.WebApi.Controllers;
 
 [Route("api/providers")]
-public class ProvidersController : ControllerBase
+[ApiExceptionFilter]
+public class ProvidersController : ApiControllerBase
 {
     private readonly IMediator _mediator;
 
@@ -31,7 +33,18 @@ public class ProvidersController : ControllerBase
         var provider = await _mediator.Send(new CreateProviderCommand(createProvider.FirstName, createProvider.LastName, 
             createProvider.Email, createProvider.Description));
         
-        return Ok(provider);
+        return Ok(provider); // TODO: add mapping from domain to web api model
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult> UpdateAsync([FromRoute] int id, [FromBody] Provider model)
+    {
+        var provider = new Core.Domain.Entities.Providers.Provider(id, model.FirstName, model.LastName, 
+            model.Email, model.Description);
+
+        var result = await _mediator.Send(new UpdateProviderCommand(provider));
+
+        return Ok(result); // TODO: map to web api model
     }
 
     [HttpDelete("{id:int}")]

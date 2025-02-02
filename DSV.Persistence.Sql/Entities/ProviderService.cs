@@ -1,6 +1,6 @@
 namespace DSV.Persistence.Sql.Entities;
 
-public class ProviderService
+internal class ProviderService
 {
     public int Id { get; set; }
     public decimal PricePerHour { get; set; }

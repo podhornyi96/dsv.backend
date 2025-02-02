@@ -1,6 +1,6 @@
 namespace DSV.Persistence.Sql.Entities;
 
-public class Service
+internal class Service
 {
     public int Id { get; set; }
     public string Name { get; set; } = default!;
