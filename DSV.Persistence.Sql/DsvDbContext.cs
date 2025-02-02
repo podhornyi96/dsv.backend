@@ -11,13 +11,9 @@ public class DsvDbContext : DbContext
         : base(options)
     {
     }
-
-    public DsvDbContext()
-    {
-        
-    }
     
     public DbSet<Provider> Providers => Set<Provider>();
+    public DbSet<Service> Services => Set<Service>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
