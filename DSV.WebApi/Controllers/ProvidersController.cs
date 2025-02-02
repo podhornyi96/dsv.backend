@@ -18,6 +18,17 @@ public class ProvidersController : ApiControllerBase
         _mediator = mediator;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<ICollection<Provider>>> GetAsync(
+        [FromQuery] int skip, 
+        [FromQuery] int take, 
+        [FromQuery] string? firstName)
+    {
+        var providers = await _mediator.Send(new GetProvidersQuery(skip, take, firstName));
+        
+        return Ok(providers); // TODO: map
+    }
+
     [HttpGet("{id:int}")]
     public async Task<ActionResult> GetAsync([FromRoute] int id)
     {
