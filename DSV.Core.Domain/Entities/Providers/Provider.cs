@@ -5,8 +5,6 @@ public class Provider
     public Provider(int id, string firstName, string lastName, 
         string email, string? description)
     {
-        // TODO: add checks
-        
         Id = id;
         FirstName = firstName;
         LastName = lastName;

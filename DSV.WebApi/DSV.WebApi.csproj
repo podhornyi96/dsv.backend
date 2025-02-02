@@ -12,6 +12,7 @@
         <PackageReference Include="Swashbuckle.AspNetCore"/>
         <PackageReference Include="FluentValidation.AspNetCore"/>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>
+        <PackageReference Include="AutoMapper"/>
     </ItemGroup>
 
     <ItemGroup>

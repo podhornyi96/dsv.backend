@@ -1,3 +1,4 @@
+using AutoMapper;
 using DSV.Core.Domain.Contracts.Providers.Commands;
 using DSV.Core.Domain.Contracts.Providers.Queries;
 using DSV.WebApi.Common.Filters;
@@ -12,10 +13,12 @@ namespace DSV.WebApi.Controllers;
 public class ProvidersController : ApiControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public ProvidersController(IMediator mediator)
+    public ProvidersController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -26,36 +29,38 @@ public class ProvidersController : ApiControllerBase
     {
         var providers = await _mediator.Send(new GetProvidersQuery(skip, take, firstName));
         
-        return Ok(providers); // TODO: map
+        return Ok(_mapper.Map<ResultSet<Provider>>(providers));
     }
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult> GetAsync([FromRoute] int id)
     {
-        var result = await _mediator.Send(new GetProviderQuery(id));
+        var provider = await _mediator.Send(new GetProviderQuery(id));
         
-        return result is null ? NotFound() : Ok(result);
+        return provider is null ? NotFound() : Ok(_mapper.Map<Provider>(provider));
     }
     
     [HttpPost]
-    public async Task<ActionResult> CreateAsync([FromBody] CreateProviderCommand createProvider)
+    public async Task<ActionResult> CreateAsync([FromBody] CreateProvider createProvider)
     {
-        // TODO: can be added mapper between WebApi model and Domain model
         var provider = await _mediator.Send(new CreateProviderCommand(createProvider.FirstName, createProvider.LastName, 
             createProvider.Email, createProvider.Description));
         
-        return Ok(provider); // TODO: add mapping from domain to web api model
+        return Ok(_mapper.Map<Provider>(provider));
     }
 
     [HttpPut("{id:int}")]
     public async Task<ActionResult> UpdateAsync([FromRoute] int id, [FromBody] Provider model)
     {
-        var provider = new Core.Domain.Entities.Providers.Provider(id, model.FirstName, model.LastName, 
-            model.Email, model.Description);
-
+        if (id != model.Id)
+        {
+            return BadRequest();
+        }
+        
+        var provider = _mapper.Map<Core.Domain.Entities.Providers.Provider>(model);
         var result = await _mediator.Send(new UpdateProviderCommand(provider));
 
-        return Ok(result); // TODO: map to web api model
+        return Ok(_mapper.Map<Provider>(result));
     }
 
     [HttpDelete("{id:int}")]
