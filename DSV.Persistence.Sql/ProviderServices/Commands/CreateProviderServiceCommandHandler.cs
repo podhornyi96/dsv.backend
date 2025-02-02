@@ -2,7 +2,7 @@ using DSV.Core.Domain.Contracts.ProviderServices.Commands;
 using DSV.Core.Domain.Entities.Providers;
 using MediatR;
 
-namespace DSV.Persistence.Sql.ProviderServices;
+namespace DSV.Persistence.Sql.ProviderServices.Commands;
 
 internal sealed class CreateProviderServiceCommandHandler : IRequestHandler<CreateProviderServiceCommand, ProviderService>
 {
@@ -24,6 +24,8 @@ internal sealed class CreateProviderServiceCommandHandler : IRequestHandler<Crea
         };
         
         await _context.ProviderServices.AddAsync(providerService, cancellationToken);
+        
+        await _context.SaveChangesAsync(cancellationToken);
         
         return new ProviderService(providerService.ServiceId, request.Name, providerService.PricePerHour, 
             providerService.DurationMinutes);

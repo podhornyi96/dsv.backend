@@ -11,5 +11,13 @@ internal static class QueryExtensions
     {
         return !string.IsNullOrEmpty(fieldValue) ? source.Where(predicate) : source;
     }
+    
+    public static IQueryable<T> WhereIf<T>(
+        this IQueryable<T> source, 
+        bool condition, 
+        Expression<Func<T, bool>> predicate)
+    {
+        return condition ? source.Where(predicate) : source;
+    }
 
 }

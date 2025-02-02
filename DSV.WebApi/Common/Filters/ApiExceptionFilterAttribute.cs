@@ -16,6 +16,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
             { typeof(ValidationException), HandleValidationException },
             { typeof(NotFoundException), HandleNotFoundException },
             { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
+            { typeof(BusinessException), HandleBusinessException },
         };
     }
 
@@ -96,6 +97,23 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         context.Result = new ObjectResult(details)
         {
             StatusCode = StatusCodes.Status401Unauthorized
+        };
+
+        context.ExceptionHandled = true;
+    }
+    
+    private void HandleBusinessException(ExceptionContext context)
+    {
+        var details = new ProblemDetails
+        {
+            Status = StatusCodes.Status409Conflict,
+            Title = "Conflict occured",
+            Type = "https://tools.ietf.org/html/rfc7235#section-3.1"
+        };
+
+        context.Result = new ObjectResult(details)
+        {
+            StatusCode = StatusCodes.Status409Conflict
         };
 
         context.ExceptionHandled = true;
