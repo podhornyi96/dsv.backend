@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="MSTest.TestFramework"/>
+        <PackageReference Include="MSTest.TestAdapter"/>
+        <PackageReference Include="FakeItEasy"/>
+        <PackageReference Include="FluentAssertions"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\DSV.Core.Domain\DSV.Core.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

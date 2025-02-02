@@ -1,9 +1,14 @@
+using Ardalis.GuardClauses;
+
 namespace DSV.Core.Domain.Entities.Providers;
 
 public class ProviderService
 {
     public ProviderService(int id, int serviceId, string name, decimal pricePerHour, int durationMinutes)
     {
+        Guard.Against.Negative(pricePerHour, nameof(pricePerHour));
+        Guard.Against.Negative(durationMinutes, nameof(durationMinutes));
+        
         Id = id;
         ServiceId = serviceId;
         Name = name;
