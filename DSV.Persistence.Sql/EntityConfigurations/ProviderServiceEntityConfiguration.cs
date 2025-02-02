@@ -9,7 +9,6 @@ internal sealed  class ProviderServiceEntityConfiguration : IEntityTypeConfigura
     public void Configure(EntityTypeBuilder<ProviderService> builder)
     {
         builder.Property(x => x.PricePerHour).HasPrecision(18, 2).IsRequired();
-        builder.Property(x => x.PricePerSession).HasPrecision(18, 2).IsRequired();
         builder.Property(x => x.DurationMinutes).HasPrecision(18, 2).IsRequired();
         
         builder.HasOne(x => x.Provider)

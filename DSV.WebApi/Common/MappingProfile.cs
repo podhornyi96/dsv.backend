@@ -1,5 +1,6 @@
 using AutoMapper;
 using DSV.WebApi.Models;
+using DSV.WebApi.Models.Providers;
 
 namespace DSV.WebApi.Common;
 

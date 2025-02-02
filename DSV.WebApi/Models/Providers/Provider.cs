@@ -1,4 +1,4 @@
-namespace DSV.WebApi.Models;
+namespace DSV.WebApi.Models.Providers;
 
 public class Provider
 {

@@ -1,4 +1,5 @@
 using DSV.WebApi.Models;
+using DSV.WebApi.Models.Providers;
 using FluentValidation;
 
 namespace DSV.WebApi.Validators;

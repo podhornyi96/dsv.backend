@@ -1,3 +1,4 @@
+using DSV.Core.Services;
 using DSV.Persistence.Sql;
 using DSV.WebApi;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddCoreServices();
 builder.Services.AddPersistence(builder.Configuration);
 
 var app = builder.Build();

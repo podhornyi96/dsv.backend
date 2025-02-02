@@ -3,6 +3,7 @@ using DSV.Core.Domain.Contracts.Providers.Commands;
 using DSV.Core.Domain.Contracts.Providers.Queries;
 using DSV.WebApi.Common.Filters;
 using DSV.WebApi.Models;
+using DSV.WebApi.Models.Providers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
