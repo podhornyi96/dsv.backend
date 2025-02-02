@@ -6,7 +6,7 @@ namespace DSV.Core.Domain.Contracts.ProviderServices.Queries;
 
 public class GetProviderServicesQuery : IRequest<ResultSet<ProviderService>>
 {
-    public GetProviderServicesQuery(int providerId, int skip, int top, int? serviceId)
+    public GetProviderServicesQuery(int providerId, int skip, int top, int? serviceId = null)
     {
         ProviderId = providerId;
         Skip = skip;
