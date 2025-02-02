@@ -10,6 +10,8 @@ public class MappingProfile : Profile
         CreateMap<Provider, Core.Domain.Entities.Providers.Provider>();
         CreateMap<Core.Domain.Entities.Providers.Provider, Provider>();
         
+        CreateMap<Core.Domain.Entities.Services.Service, Service>();
+        
         CreateMap(typeof(Core.Domain.Entities.Common.ResultSet<>), typeof(ResultSet<>));
     }
 }
