@@ -1,6 +1,7 @@
 using DSV.Core.Services;
 using DSV.Persistence.Sql;
 using DSV.WebApi;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +24,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("CorsPolicy");
+
 app.MapControllers()
     .WithOpenApi();
-
-// using var scope = app.Services.CreateScope(); // TODO: ...
-// var context = scope.ServiceProvider.GetRequiredService<DsvDbContext>();
-// await context.Database.MigrateAsync();
 
 app.Run();
