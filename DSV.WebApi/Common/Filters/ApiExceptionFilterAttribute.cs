@@ -108,7 +108,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         {
             Status = StatusCodes.Status409Conflict,
             Title = "Conflict occured",
-            Type = "https://tools.ietf.org/html/rfc7235#section-3.1"
+            Detail = context.Exception.Message
         };
 
         context.Result = new ObjectResult(details)
